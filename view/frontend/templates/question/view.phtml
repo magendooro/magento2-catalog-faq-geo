@@ -1,0 +1,25 @@
+<?php
+/**
+ * Magendoo Faq Question View Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Question\View $block */
+?>
+<?php $question = $block->getQuestion(); ?>
+<?php if ($question): ?>
+<div class="faq-question-view">
+    <?php /* Page title rendered by default Magento page-title-wrapper block. */ ?>
+
+    <div class="faq-full-answer">
+        <?= /* @noEscape */ $question->getFullAnswer() ?>
+    </div>
+
+    <?= $block->getChildHtml('rating') ?>
+    <?= $block->getChildHtml('social') ?>
+</div>
+<?php endif; ?>

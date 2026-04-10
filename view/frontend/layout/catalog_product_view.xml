@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Product Page FAQ Tab Layout
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="Magendoo\Faq\Block\Product\Questions" name="product.faq.tab" as="product_faq"
+                   template="Magendoo_Faq::product/questions.phtml" group="detailed_info"
+                   ifconfig="magendoo_faq/product_page/enabled">
+                <arguments>
+                    <argument name="sort_order" xsi:type="string">40</argument>
+                    <argument name="title" translate="true" xsi:type="string">Product Questions</argument>
+                </arguments>
+                <block class="Magendoo\Faq\Block\Faq\Question\AskForm" name="product.faq.ask.form"
+                       as="ask_form" template="Magendoo_Faq::question/ask-form.phtml"
+                       ifconfig="magendoo_faq/product_page/show_ask_button">
+                    <!--
+                      Container for additional info (reCAPTCHA, future
+                      privacy hints, etc.). The Magento ReCaptchaUi block
+                      slots in here when the admin enables it for the
+                      `magendoo_faq_question_submit` integration key under
+                      Stores → Configuration → Security → Google reCAPTCHA Storefront.
+                    -->
+                    <container name="form.additional.faq.ask.info" as="form_additional_info" label="FAQ Ask Form Additional Info">
+                        <block class="Magento\ReCaptchaUi\Block\ReCaptcha"
+                               name="magendoo_faq_ask_recaptcha"
+                               after="-"
+                               template="Magento_ReCaptchaFrontendUi::recaptcha.phtml"
+                               ifconfig="recaptcha_frontend/type_for/magendoo_faq_question_submit">
+                            <arguments>
+                                <argument name="recaptcha_for" xsi:type="string">magendoo_faq_question_submit</argument>
+                                <argument name="jsLayout" xsi:type="array">
+                                    <item name="components" xsi:type="array">
+                                        <item name="recaptcha" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magento_ReCaptchaFrontendUi/js/reCaptcha</item>
+                                        </item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </container>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

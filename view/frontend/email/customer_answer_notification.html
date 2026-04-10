@@ -1,0 +1,21 @@
+<!--@subject Your FAQ Question Has Been Answered @-->
+<!--@vars {
+"var question.title":"Question Title",
+"var question_full_answer":"Answer",
+"var sender_name":"Sender Name"
+} @-->
+{{template config_path="design/email/header_template"}}
+<table>
+    <tr><td>
+        <h1>{{trans "Your Question Has Been Answered"}}</h1>
+        <p>{{trans "Hi %name," name=$sender_name}}</p>
+        <p>{{trans "Thank you for submitting your question. Here is the answer:"}}</p>
+        <div style="border-left: 3px solid #ccc; padding: 10px; margin: 15px 0;">
+            <p><strong>{{trans "Your question:"}}</strong></p>
+            <p>{{var question_title}}</p>
+            <p><strong>{{trans "Our answer:"}}</strong></p>
+            <div>{{var question_full_answer}}</div>
+        </div>
+    </td></tr>
+</table>
+{{template config_path="design/email/footer_template"}}

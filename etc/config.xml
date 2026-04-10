@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Default Configuration
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magendoo_faq>
+            <general>
+                <enabled>1</enabled>
+                <title>FAQ</title>
+                <url_prefix>faq</url_prefix>
+                <allow_guest_questions>1</allow_guest_questions>
+            </general>
+            <home_page>
+                <use_cms_page>0</use_cms_page>
+                <layout>none</layout>
+            </home_page>
+            <navigation>
+                <show_breadcrumbs>1</show_breadcrumbs>
+                <show_ask_button>1</show_ask_button>
+                <sort_categories_by>position</sort_categories_by>
+                <sort_questions_by>position</sort_questions_by>
+                <answer_length_limit>250</answer_length_limit>
+                <show_search_box>1</show_search_box>
+                <questions_per_category_page>10</questions_per_category_page>
+                <questions_per_search_page>10</questions_per_search_page>
+                <short_answer_behavior>short_answer</short_answer_behavior>
+            </navigation>
+            <product_page>
+                <enabled>1</enabled>
+                <tab_name>Product Questions</tab_name>
+                <tab_position>40</tab_position>
+                <show_ask_button>1</show_ask_button>
+                <questions_limit>10</questions_limit>
+            </product_page>
+            <rating>
+                <enabled>1</enabled>
+                <type>yes_no</type>
+                <allow_guest_rating>1</allow_guest_rating>
+            </rating>
+            <social>
+                <enabled>0</enabled>
+            </social>
+            <seo>
+                <url_suffix_enabled>0</url_suffix_enabled>
+                <url_suffix>.html</url_suffix>
+                <structured_data_enabled>1</structured_data_enabled>
+                <add_to_sitemap>1</add_to_sitemap>
+                <robots_search_results>NOINDEX,FOLLOW</robots_search_results>
+            </seo>
+            <user_notifications>
+                <enabled>0</enabled>
+                <email_sender>general</email_sender>
+                <email_template>magendoo_faq_user_notifications_email_template</email_template>
+            </user_notifications>
+            <admin_notifications>
+                <enabled>0</enabled>
+                <send_to>admin@example.com</send_to>
+                <email_template>magendoo_faq_admin_notifications_email_template</email_template>
+            </admin_notifications>
+            <gdpr>
+                <enabled>0</enabled>
+            </gdpr>
+        </magendoo_faq>
+    </default>
+</config>

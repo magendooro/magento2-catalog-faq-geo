@@ -1,0 +1,33 @@
+<?php
+/**
+ * Magendoo Faq Search Results Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Search $block */
+?>
+<div class="faq-search-results">
+    <?php /* Page title rendered by default Magento page-title-wrapper block. */ ?>
+
+    <?php $results = $block->getResults(); ?>
+    <?php if ($results && $results->getSize()): ?>
+        <div class="faq-results-list">
+            <?php foreach ($results as $question): ?>
+            <div class="faq-result-item">
+                <h3><a href="<?= $block->escapeUrl($block->getUrl('faq/question/view', ['id' => $question->getQuestionId()])) ?>">
+                    <?= $block->escapeHtml($question->getTitle()) ?>
+                </a></h3>
+                <?php if ($question->getShortAnswer()): ?>
+                <p><?= $block->escapeHtml($question->getShortAnswer()) ?></p>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p class="faq-no-results"><?= $block->escapeHtml($block->getNoResultsText()) ?></p>
+    <?php endif; ?>
+</div>

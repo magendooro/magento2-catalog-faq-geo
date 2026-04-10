@@ -1,0 +1,30 @@
+<?php
+/**
+ * Magendoo Faq Question Rating - Yes/No Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Question\Rating $block */
+?>
+<?php $question = $block->getQuestion(); ?>
+<?php if ($question): ?>
+<div class="faq-rating faq-rating--yes-no"
+     data-question-id="<?= (int) $question->getQuestionId() ?>"
+     data-mage-init='{"faqRating": {}}'>
+    <span class="rating-label"><?= $block->escapeHtml(__('Was this helpful?')) ?></span>
+    <button type="button" class="action faq-rate faq-rate--yes" data-vote="positive"
+            data-url="<?= $block->escapeUrl($block->getRateUrl()) ?>">
+        <span><?= $block->escapeHtml(__('Yes')) ?></span>
+        <span class="count">(<?= (int) $block->getPositiveCount() ?>)</span>
+    </button>
+    <button type="button" class="action faq-rate faq-rate--no" data-vote="negative"
+            data-url="<?= $block->escapeUrl($block->getRateUrl()) ?>">
+        <span><?= $block->escapeHtml(__('No')) ?></span>
+        <span class="count">(<?= (int) $block->getNegativeCount() ?>)</span>
+    </button>
+</div>
+<?php endif; ?>

@@ -1,0 +1,64 @@
+<?php
+/**
+ * Magendoo Faq Ask a Question Form Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Question\AskForm $block */
+?>
+<?php if (!$block->canShowForm()): ?>
+    <div class="faq-ask-login-required">
+        <p><?= $block->escapeHtml(__('Please')) ?>
+           <a href="<?= $block->escapeUrl($block->getLoginUrl()) ?>"><?= $block->escapeHtml(__('log in')) ?></a>
+           <?= $block->escapeHtml(__('to ask a question.')) ?></p>
+    </div>
+<?php else: ?>
+<div class="faq-ask-form-wrapper">
+    <h3 class="faq-ask-form-title"><?= $block->escapeHtml(__('Ask a Question')) ?></h3>
+    <form action="<?= $block->escapeUrl($block->getSubmitUrl()) ?>" method="post" id="faq-ask-form">
+        <?= $block->getBlockHtml('formkey') ?>
+        <?php if ($block->getCurrentProductId()): ?>
+            <input type="hidden" name="product_id" value="<?= (int)$block->getCurrentProductId() ?>"/>
+        <?php endif; ?>
+        <div class="field required">
+            <label for="faq-ask-name"><?= $block->escapeHtml(__('Your Name')) ?></label>
+            <div class="control">
+                <input type="text" id="faq-ask-name" name="sender_name" required
+                       value="<?= $block->escapeHtmlAttr($block->getLoggedInCustomerName()) ?>"/>
+            </div>
+        </div>
+        <div class="field required">
+            <label for="faq-ask-email"><?= $block->escapeHtml(__('Email')) ?></label>
+            <div class="control">
+                <input type="email" id="faq-ask-email" name="sender_email" required
+                       value="<?= $block->escapeHtmlAttr($block->getLoggedInCustomerEmail()) ?>"/>
+            </div>
+        </div>
+        <div class="field required">
+            <label for="faq-ask-title"><?= $block->escapeHtml(__('Your Question')) ?></label>
+            <div class="control">
+                <textarea id="faq-ask-title" name="title" rows="3" required></textarea>
+            </div>
+        </div>
+        <?php if ($block->isGdprEnabled()): ?>
+        <div class="field required faq-gdpr-consent">
+            <div class="control">
+                <input type="checkbox" id="faq-gdpr" name="gdpr_consent" value="1" required/>
+                <label for="faq-gdpr"><?= /* @noEscape */ $block->getGdprText() ?></label>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php /* Additional info slot — Magento ReCaptchaUi injects the
+                 reCAPTCHA widget here when the admin enables
+                 `recaptcha_frontend/type_for/magendoo_faq_question_submit`. */ ?>
+        <?= $block->getChildHtml('form_additional_info') ?>
+        <div class="actions-toolbar">
+            <button type="submit" class="action primary"><?= $block->escapeHtml(__('Submit Question')) ?></button>
+        </div>
+    </form>
+</div>
+<?php endif; ?>

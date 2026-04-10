@@ -1,0 +1,33 @@
+<?php
+/**
+ * Magendoo Faq Product Questions Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Product\Questions $block */
+?>
+<div class="faq-product-questions">
+    <?php $questions = $block->getQuestions(); ?>
+    <?php if ($questions && count($questions)): ?>
+        <div class="faq-product-list">
+            <?php foreach ($questions as $question): ?>
+            <div class="faq-product-item">
+                <div class="faq-question-text">
+                    <strong><?= $block->escapeHtml($question->getTitle()) ?></strong>
+                </div>
+                <div class="faq-answer-text">
+                    <?= $block->escapeHtml($question->getShortAnswer() ?: mb_substr(strip_tags($question->getFullAnswer()), 0, 250)) ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <p><?= $block->escapeHtml(__('No questions yet for this product.')) ?></p>
+    <?php endif; ?>
+
+    <?= $block->getChildHtml('ask_form') ?>
+</div>

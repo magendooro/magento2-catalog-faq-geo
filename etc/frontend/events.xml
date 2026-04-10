@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Frontend Events
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--
+      Validate Google reCAPTCHA on the FAQ "Ask a Question" submit endpoint.
+      The full action name pattern is module_controller_action: our submit
+      route is `faq/question/submit` so the predispatch event is
+      `controller_action_predispatch_faq_question_submit`.
+    -->
+    <event name="controller_action_predispatch_faq_question_submit">
+        <observer name="magendoo_faq_recaptcha_ask_question"
+                  instance="Magendoo\Faq\Observer\AskQuestionRecaptchaObserver"/>
+    </event>
+</config>

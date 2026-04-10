@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Email Templates
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <!--
+      Template IDs MUST match the transformed config path (slashes -> underscores).
+      Magento's Email\Template source model looks them up using the field's own
+      config_path. Renaming the IDs breaks the admin config dropdown with
+      "Email template is not defined".
+    -->
+    <template id="magendoo_faq_admin_notifications_email_template"
+              label="FAQ: New Question Notification (Admin)"
+              file="admin_new_question.html"
+              type="html"
+              module="Magendoo_Faq"
+              area="adminhtml"/>
+    <template id="magendoo_faq_user_notifications_email_template"
+              label="FAQ: Answer Notification (Customer)"
+              file="customer_answer_notification.html"
+              type="html"
+              module="Magendoo_Faq"
+              area="frontend"/>
+</config>

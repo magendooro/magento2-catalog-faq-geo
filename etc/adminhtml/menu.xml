@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Admin Menu configuration
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magendoo_Faq::faq"
+             title="FAQ"
+             module="Magendoo_Faq"
+             sortOrder="60"
+             parent="Magento_Backend::content"
+             resource="Magendoo_Faq::faq"/>
+        <add id="Magendoo_Faq::category"
+             title="FAQ Categories"
+             module="Magendoo_Faq"
+             sortOrder="10"
+             parent="Magendoo_Faq::faq"
+             action="faq/category/index"
+             resource="Magendoo_Faq::category"/>
+        <add id="Magendoo_Faq::question"
+             title="FAQ Questions"
+             module="Magendoo_Faq"
+             sortOrder="20"
+             parent="Magendoo_Faq::faq"
+             action="faq/question/index"
+             resource="Magendoo_Faq::question"/>
+        <add id="Magendoo_Faq::search_log"
+             title="FAQ Search Terms"
+             module="Magendoo_Faq"
+             sortOrder="30"
+             parent="Magendoo_Faq::faq"
+             action="faq/searchlog/index"
+             resource="Magendoo_Faq::search_log"/>
+    </menu>
+</config>

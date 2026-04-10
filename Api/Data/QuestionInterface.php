@@ -1,0 +1,450 @@
+<?php
+/**
+ * Magendoo Faq Question Interface
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+declare(strict_types=1);
+
+namespace Magendoo\Faq\Api\Data;
+
+use Magento\Framework\Api\ExtensibleDataInterface;
+
+/**
+ * FAQ Question Interface
+ *
+ * @api
+ */
+interface QuestionInterface extends ExtensibleDataInterface
+{
+    /** Status constants */
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_ANSWERED = 'answered';
+    public const STATUS_REJECTED = 'rejected';
+
+    /** Visibility constants */
+    public const VISIBILITY_NONE = 'none';
+    public const VISIBILITY_PUBLIC = 'public';
+    public const VISIBILITY_LOGGED_IN = 'logged_in';
+
+    /** Constants for field names */
+    public const QUESTION_ID = 'question_id';
+    public const TITLE = 'title';
+    public const URL_KEY = 'url_key';
+    public const SHORT_ANSWER = 'short_answer';
+    public const FULL_ANSWER = 'full_answer';
+    public const STATUS = 'status';
+    public const VISIBILITY = 'visibility';
+    public const POSITION = 'position';
+    public const IS_SHOW_FULL_ANSWER = 'is_show_full_answer';
+    public const SENDER_NAME = 'sender_name';
+    public const SENDER_EMAIL = 'sender_email';
+    public const CUSTOMER_ID = 'customer_id';
+    public const POSITIVE_RATING = 'positive_rating';
+    public const NEGATIVE_RATING = 'negative_rating';
+    public const AVERAGE_RATING = 'average_rating';
+    public const VIEW_COUNT = 'view_count';
+    public const META_TITLE = 'meta_title';
+    public const META_DESCRIPTION = 'meta_description';
+    public const NOINDEX = 'noindex';
+    public const NOFOLLOW = 'nofollow';
+    public const CANONICAL_URL = 'canonical_url';
+    public const EXCLUDE_SITEMAP = 'exclude_sitemap';
+    public const HIDE_DIRECT_URL = 'hide_direct_url';
+    public const CREATED_AT = 'created_at';
+    public const UPDATED_AT = 'updated_at';
+
+    /**
+     * Get question ID
+     *
+     * @return int|null
+     */
+    public function getQuestionId(): ?int;
+
+    /**
+     * Set question ID
+     *
+     * @param int $questionId
+     * @return $this
+     */
+    public function setQuestionId(int $questionId): static;
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle(): string;
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): static;
+
+    /**
+     * Get URL key
+     *
+     * @return string|null
+     */
+    public function getUrlKey(): ?string;
+
+    /**
+     * Set URL key
+     *
+     * @param string|null $urlKey
+     * @return $this
+     */
+    public function setUrlKey(?string $urlKey): static;
+
+    /**
+     * Get short answer
+     *
+     * @return string|null
+     */
+    public function getShortAnswer(): ?string;
+
+    /**
+     * Set short answer
+     *
+     * @param string|null $shortAnswer
+     * @return $this
+     */
+    public function setShortAnswer(?string $shortAnswer): static;
+
+    /**
+     * Get full answer
+     *
+     * @return string|null
+     */
+    public function getFullAnswer(): ?string;
+
+    /**
+     * Set full answer
+     *
+     * @param string|null $fullAnswer
+     * @return $this
+     */
+    public function setFullAnswer(?string $fullAnswer): static;
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus(): string;
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return $this
+     */
+    public function setStatus(string $status): static;
+
+    /**
+     * Get visibility
+     *
+     * @return string
+     */
+    public function getVisibility(): string;
+
+    /**
+     * Set visibility
+     *
+     * @param string $visibility
+     * @return $this
+     */
+    public function setVisibility(string $visibility): static;
+
+    /**
+     * Get position
+     *
+     * @return int
+     */
+    public function getPosition(): int;
+
+    /**
+     * Set position
+     *
+     * @param int $position
+     * @return $this
+     */
+    public function setPosition(int $position): static;
+
+    /**
+     * Get is show full answer
+     *
+     * @return bool
+     */
+    public function getIsShowFullAnswer(): bool;
+
+    /**
+     * Set is show full answer
+     *
+     * @param bool $isShowFullAnswer
+     * @return $this
+     */
+    public function setIsShowFullAnswer(bool $isShowFullAnswer): static;
+
+    /**
+     * Get sender name
+     *
+     * @return string|null
+     */
+    public function getSenderName(): ?string;
+
+    /**
+     * Set sender name
+     *
+     * @param string|null $senderName
+     * @return $this
+     */
+    public function setSenderName(?string $senderName): static;
+
+    /**
+     * Get sender email
+     *
+     * @return string|null
+     */
+    public function getSenderEmail(): ?string;
+
+    /**
+     * Set sender email
+     *
+     * @param string|null $senderEmail
+     * @return $this
+     */
+    public function setSenderEmail(?string $senderEmail): static;
+
+    /**
+     * Get customer ID
+     *
+     * @return int|null
+     */
+    public function getCustomerId(): ?int;
+
+    /**
+     * Set customer ID
+     *
+     * @param int|null $customerId
+     * @return $this
+     */
+    public function setCustomerId(?int $customerId): static;
+
+    /**
+     * Get positive rating
+     *
+     * @return int
+     */
+    public function getPositiveRating(): int;
+
+    /**
+     * Set positive rating
+     *
+     * @param int $positiveRating
+     * @return $this
+     */
+    public function setPositiveRating(int $positiveRating): static;
+
+    /**
+     * Get negative rating
+     *
+     * @return int
+     */
+    public function getNegativeRating(): int;
+
+    /**
+     * Set negative rating
+     *
+     * @param int $negativeRating
+     * @return $this
+     */
+    public function setNegativeRating(int $negativeRating): static;
+
+    /**
+     * Get average rating
+     *
+     * @return float
+     */
+    public function getAverageRating(): float;
+
+    /**
+     * Set average rating
+     *
+     * @param float $averageRating
+     * @return $this
+     */
+    public function setAverageRating(float $averageRating): static;
+
+    /**
+     * Get view count
+     *
+     * @return int
+     */
+    public function getViewCount(): int;
+
+    /**
+     * Set view count
+     *
+     * @param int $viewCount
+     * @return $this
+     */
+    public function setViewCount(int $viewCount): static;
+
+    /**
+     * Get meta title
+     *
+     * @return string|null
+     */
+    public function getMetaTitle(): ?string;
+
+    /**
+     * Set meta title
+     *
+     * @param string|null $metaTitle
+     * @return $this
+     */
+    public function setMetaTitle(?string $metaTitle): static;
+
+    /**
+     * Get meta description
+     *
+     * @return string|null
+     */
+    public function getMetaDescription(): ?string;
+
+    /**
+     * Set meta description
+     *
+     * @param string|null $metaDescription
+     * @return $this
+     */
+    public function setMetaDescription(?string $metaDescription): static;
+
+    /**
+     * Get noindex
+     *
+     * @return bool
+     */
+    public function getNoindex(): bool;
+
+    /**
+     * Set noindex
+     *
+     * @param bool $noindex
+     * @return $this
+     */
+    public function setNoindex(bool $noindex): static;
+
+    /**
+     * Get nofollow
+     *
+     * @return bool
+     */
+    public function getNofollow(): bool;
+
+    /**
+     * Set nofollow
+     *
+     * @param bool $nofollow
+     * @return $this
+     */
+    public function setNofollow(bool $nofollow): static;
+
+    /**
+     * Get canonical URL
+     *
+     * @return string|null
+     */
+    public function getCanonicalUrl(): ?string;
+
+    /**
+     * Set canonical URL
+     *
+     * @param string|null $canonicalUrl
+     * @return $this
+     */
+    public function setCanonicalUrl(?string $canonicalUrl): static;
+
+    /**
+     * Get exclude from sitemap
+     *
+     * @return bool
+     */
+    public function getExcludeSitemap(): bool;
+
+    /**
+     * Set exclude from sitemap
+     *
+     * @param bool $excludeSitemap
+     * @return $this
+     */
+    public function setExcludeSitemap(bool $excludeSitemap): static;
+
+    /**
+     * Get hide direct URL
+     *
+     * @return bool
+     */
+    public function getHideDirectUrl(): bool;
+
+    /**
+     * Set hide direct URL
+     *
+     * @param bool $hideDirectUrl
+     * @return $this
+     */
+    public function setHideDirectUrl(bool $hideDirectUrl): static;
+
+    /**
+     * Get created at
+     *
+     * @return string|null
+     */
+    public function getCreatedAt(): ?string;
+
+    /**
+     * Set created at
+     *
+     * @param string|null $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(?string $createdAt): static;
+
+    /**
+     * Get updated at
+     *
+     * @return string|null
+     */
+    public function getUpdatedAt(): ?string;
+
+    /**
+     * Set updated at
+     *
+     * @param string|null $updatedAt
+     * @return $this
+     */
+    public function setUpdatedAt(?string $updatedAt): static;
+
+    /**
+     * Get extension attributes
+     *
+     * @return \Magendoo\Faq\Api\Data\QuestionExtensionInterface|null
+     */
+    public function getExtensionAttributes(): ?\Magendoo\Faq\Api\Data\QuestionExtensionInterface;
+
+    /**
+     * Set extension attributes
+     *
+     * @param \Magendoo\Faq\Api\Data\QuestionExtensionInterface $extensionAttributes
+     * @return $this
+     */
+    public function setExtensionAttributes(\Magendoo\Faq\Api\Data\QuestionExtensionInterface $extensionAttributes): static;
+}

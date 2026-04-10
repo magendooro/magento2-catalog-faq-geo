@@ -1,0 +1,48 @@
+<?php
+/**
+ * Magendoo Faq Category View Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Category\View $block */
+?>
+<?php $category = $block->getCategory(); ?>
+<?php if ($category): ?>
+<div class="faq-category-view">
+    <?php /* Page title is rendered by the default Magento page-title-wrapper block
+            from the page config title set in the controller. No inline <h1> here
+            to avoid a duplicate heading. */ ?>
+
+    <?php if ($category->getDescription()): ?>
+    <div class="faq-category-description"><?= $block->escapeHtml($category->getDescription()) ?></div>
+    <?php endif; ?>
+
+    <div class="faq-questions-list">
+        <?php $questions = $block->getQuestions(); ?>
+        <?php if ($questions && $questions->getSize()): ?>
+            <?php foreach ($questions as $question): ?>
+            <div class="faq-question-item">
+                <h3 class="faq-question-title">
+                    <a href="<?= $block->escapeUrl($block->getQuestionUrl($question)) ?>">
+                        <?= $block->escapeHtml($question->getTitle()) ?>
+                    </a>
+                </h3>
+                <div class="faq-answer-preview">
+                    <?= $block->escapeHtml($block->getAnswerPreview($question)) ?>
+                    <a href="<?= $block->escapeUrl($block->getQuestionUrl($question)) ?>" class="read-more">
+                        <?= $block->escapeHtml(__('Read More')) ?>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+            <?= $block->getPagerHtml() ?>
+        <?php else: ?>
+            <p class="faq-no-questions"><?= $block->escapeHtml(__('No questions in this category yet.')) ?></p>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>

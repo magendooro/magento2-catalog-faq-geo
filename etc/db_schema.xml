@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo FAQ Database Schema
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <!-- FAQ Categories -->
+    <table name="magendoo_faq_category" resource="default" engine="innodb" comment="Magendoo FAQ Categories">
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" identity="true" comment="Category ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Category Name"/>
+        <column xsi:type="varchar" name="page_title" nullable="true" length="255" comment="Category Page Title"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="icon" nullable="true" length="255" comment="Icon Image Path"/>
+        <column xsi:type="int" name="position" unsigned="true" nullable="false" default="0" comment="Sort Position"/>
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" default="1" comment="Status"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="smallint" name="noindex" unsigned="true" nullable="false" default="0" comment="Noindex"/>
+        <column xsi:type="smallint" name="nofollow" unsigned="true" nullable="false" default="0" comment="Nofollow"/>
+        <column xsi:type="varchar" name="canonical_url" nullable="true" length="255" comment="Canonical URL"/>
+        <column xsi:type="smallint" name="exclude_sitemap" unsigned="true" nullable="false" default="0" comment="Exclude from Sitemap"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+        </constraint>
+        <index referenceId="MAGENDOO_FAQ_CATEGORY_URL_KEY" indexType="btree">
+            <column name="url_key"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_CATEGORY_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+    </table>
+
+    <!-- FAQ Category Store Junction -->
+    <table name="magendoo_faq_category_store" resource="default" engine="innodb" comment="FAQ Category Store Relation">
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" comment="Category ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_CAT_STORE_CAT_ID"
+                    table="magendoo_faq_category_store" column="category_id"
+                    referenceTable="magendoo_faq_category" referenceColumn="category_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_CAT_STORE_STORE_ID"
+                    table="magendoo_faq_category_store" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- FAQ Category Customer Group Junction -->
+    <table name="magendoo_faq_category_customer_group" resource="default" engine="innodb" comment="FAQ Category Customer Group Relation">
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" comment="Category ID"/>
+        <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" comment="Customer Group ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="category_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_CAT_CGRP_CAT_ID"
+                    table="magendoo_faq_category_customer_group" column="category_id"
+                    referenceTable="magendoo_faq_category" referenceColumn="category_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- FAQ Questions -->
+    <table name="magendoo_faq_question" resource="default" engine="innodb" comment="Magendoo FAQ Questions">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" identity="true" comment="Question ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Question Title"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
+        <column xsi:type="text" name="short_answer" nullable="true" comment="Short Answer"/>
+        <column xsi:type="mediumtext" name="full_answer" nullable="true" comment="Full Answer"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="20" default="pending" comment="Status"/>
+        <column xsi:type="varchar" name="visibility" nullable="false" length="20" default="none" comment="Visibility"/>
+        <column xsi:type="int" name="position" unsigned="true" nullable="false" default="0" comment="Sort Position"/>
+        <column xsi:type="smallint" name="is_show_full_answer" unsigned="true" nullable="false" default="0" comment="Show Full Answer"/>
+        <column xsi:type="varchar" name="sender_name" nullable="true" length="255" comment="Sender Name"/>
+        <column xsi:type="varchar" name="sender_email" nullable="true" length="255" comment="Sender Email"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" comment="Customer ID"/>
+        <column xsi:type="int" name="positive_rating" unsigned="true" nullable="false" default="0" comment="Positive Rating Count"/>
+        <column xsi:type="int" name="negative_rating" unsigned="true" nullable="false" default="0" comment="Negative Rating Count"/>
+        <column xsi:type="decimal" name="average_rating" scale="2" precision="5" unsigned="true" nullable="false" default="0" comment="Average Rating"/>
+        <column xsi:type="int" name="view_count" unsigned="true" nullable="false" default="0" comment="View Count"/>
+        <column xsi:type="varchar" name="meta_title" nullable="true" length="255" comment="Meta Title"/>
+        <column xsi:type="text" name="meta_description" nullable="true" comment="Meta Description"/>
+        <column xsi:type="smallint" name="noindex" unsigned="true" nullable="false" default="0" comment="Noindex"/>
+        <column xsi:type="smallint" name="nofollow" unsigned="true" nullable="false" default="0" comment="Nofollow"/>
+        <column xsi:type="varchar" name="canonical_url" nullable="true" length="255" comment="Canonical URL"/>
+        <column xsi:type="smallint" name="exclude_sitemap" unsigned="true" nullable="false" default="0" comment="Exclude from Sitemap"/>
+        <column xsi:type="smallint" name="hide_direct_url" unsigned="true" nullable="false" default="0" comment="Hide Direct URL"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QUESTION_CUSTOMER_ID"
+                    table="magendoo_faq_question" column="customer_id"
+                    referenceTable="customer_entity" referenceColumn="entity_id"
+                    onDelete="SET NULL"/>
+        <index referenceId="MAGENDOO_FAQ_QUESTION_URL_KEY" indexType="btree">
+            <column name="url_key"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_QUESTION_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_QUESTION_VISIBILITY" indexType="btree">
+            <column name="visibility"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_QUESTION_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_QUESTION_FULLTEXT" indexType="fulltext">
+            <column name="title"/>
+            <column name="short_answer"/>
+            <column name="full_answer"/>
+        </index>
+    </table>
+
+    <!-- FAQ Question Store Junction -->
+    <table name="magendoo_faq_question_store" resource="default" engine="innodb" comment="FAQ Question Store Relation">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_Q_STORE_Q_ID"
+                    table="magendoo_faq_question_store" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_Q_STORE_STORE_ID"
+                    table="magendoo_faq_question_store" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- FAQ Question-Category Junction -->
+    <table name="magendoo_faq_question_category" resource="default" engine="innodb" comment="FAQ Question Category Relation">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" comment="Category ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QC_Q_ID"
+                    table="magendoo_faq_question_category" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QC_CAT_ID"
+                    table="magendoo_faq_question_category" column="category_id"
+                    referenceTable="magendoo_faq_category" referenceColumn="category_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MAGENDOO_FAQ_QC_CAT_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+    </table>
+
+    <!-- FAQ Question-Product Junction -->
+    <table name="magendoo_faq_question_product" resource="default" engine="innodb" comment="FAQ Question Product Relation">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QP_Q_ID"
+                    table="magendoo_faq_question_product" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QP_PRODUCT_ID"
+                    table="magendoo_faq_question_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MAGENDOO_FAQ_QP_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+
+    <!-- FAQ Question Customer Group Junction -->
+    <table name="magendoo_faq_question_customer_group" resource="default" engine="innodb" comment="FAQ Question Customer Group Relation">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="int" name="customer_group_id" unsigned="true" nullable="false" comment="Customer Group ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+            <column name="customer_group_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_Q_CGRP_Q_ID"
+                    table="magendoo_faq_question_customer_group" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- FAQ Tags -->
+    <table name="magendoo_faq_tag" resource="default" engine="innodb" comment="Magendoo FAQ Tags">
+        <column xsi:type="int" name="tag_id" unsigned="true" nullable="false" identity="true" comment="Tag ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Tag Name"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="URL Key"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="tag_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MAGENDOO_FAQ_TAG_NAME">
+            <column name="name"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MAGENDOO_FAQ_TAG_URL_KEY">
+            <column name="url_key"/>
+        </constraint>
+    </table>
+
+    <!-- FAQ Question-Tag Junction -->
+    <table name="magendoo_faq_question_tag" resource="default" engine="innodb" comment="FAQ Question Tag Relation">
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="int" name="tag_id" unsigned="true" nullable="false" comment="Tag ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="question_id"/>
+            <column name="tag_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QT_Q_ID"
+                    table="magendoo_faq_question_tag" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_QT_TAG_ID"
+                    table="magendoo_faq_question_tag" column="tag_id"
+                    referenceTable="magendoo_faq_tag" referenceColumn="tag_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+    <!-- FAQ Rating Votes -->
+    <table name="magendoo_faq_rating" resource="default" engine="innodb" comment="Magendoo FAQ Rating Votes">
+        <column xsi:type="int" name="rating_id" unsigned="true" nullable="false" identity="true" comment="Rating ID"/>
+        <column xsi:type="int" name="question_id" unsigned="true" nullable="false" comment="Question ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="true" comment="Customer ID"/>
+        <column xsi:type="varchar" name="ip_address" nullable="true" length="45" comment="IP Address"/>
+        <column xsi:type="varchar" name="vote_type" nullable="false" length="20" comment="Vote Type"/>
+        <column xsi:type="int" name="value" nullable="false" default="0" comment="Vote Value"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="rating_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_RATING_Q_ID"
+                    table="magendoo_faq_rating" column="question_id"
+                    referenceTable="magendoo_faq_question" referenceColumn="question_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_RATING_CUSTOMER_ID"
+                    table="magendoo_faq_rating" column="customer_id"
+                    referenceTable="customer_entity" referenceColumn="entity_id"
+                    onDelete="SET NULL"/>
+        <index referenceId="MAGENDOO_FAQ_RATING_Q_ID" indexType="btree">
+            <column name="question_id"/>
+        </index>
+    </table>
+
+    <!-- FAQ Search Log -->
+    <table name="magendoo_faq_search_log" resource="default" engine="innodb" comment="Magendoo FAQ Search Log">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="varchar" name="query_text" nullable="false" length="255" comment="Search Query"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" default="0" comment="Store ID"/>
+        <column xsi:type="int" name="results_count" unsigned="true" nullable="false" default="0" comment="Results Count"/>
+        <column xsi:type="int" name="hits" unsigned="true" nullable="false" default="1" comment="Hit Count"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGENDOO_FAQ_SEARCH_LOG_STORE_ID"
+                    table="magendoo_faq_search_log" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MAGENDOO_FAQ_SEARCH_LOG_QUERY" indexType="btree">
+            <column name="query_text"/>
+        </index>
+        <index referenceId="MAGENDOO_FAQ_SEARCH_LOG_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+</schema>

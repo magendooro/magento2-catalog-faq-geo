@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Web API configuration
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Category CRUD Operations -->
+    <route url="/V1/faq/categories" method="GET">
+        <service class="Magendoo\Faq\Api\CategoryRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magendoo_Faq::category"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/categories/:categoryId" method="GET">
+        <service class="Magendoo\Faq\Api\CategoryRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magendoo_Faq::category"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/categories" method="POST">
+        <service class="Magendoo\Faq\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magendoo_Faq::category_edit"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/categories/:categoryId" method="PUT">
+        <service class="Magendoo\Faq\Api\CategoryRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magendoo_Faq::category_edit"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/categories/:categoryId" method="DELETE">
+        <service class="Magendoo\Faq\Api\CategoryRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Magendoo_Faq::category_delete"/>
+        </resources>
+    </route>
+
+    <!-- Question CRUD Operations -->
+    <route url="/V1/faq/questions" method="GET">
+        <service class="Magendoo\Faq\Api\QuestionRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions/:questionId" method="GET">
+        <service class="Magendoo\Faq\Api\QuestionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions" method="POST">
+        <service class="Magendoo\Faq\Api\QuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question_edit"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions/:questionId" method="PUT">
+        <service class="Magendoo\Faq\Api\QuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question_edit"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions/:questionId" method="DELETE">
+        <service class="Magendoo\Faq\Api\QuestionRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question_delete"/>
+        </resources>
+    </route>
+
+    <!-- Question Operations -->
+    <route url="/V1/faq/questions/submit" method="POST">
+        <service class="Magendoo\Faq\Api\QuestionManagementInterface" method="submitQuestion"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions/:questionId/rate" method="POST">
+        <service class="Magendoo\Faq\Api\QuestionManagementInterface" method="rateQuestion"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/products/:productId/questions" method="GET">
+        <service class="Magendoo\Faq\Api\QuestionManagementInterface" method="getProductQuestions"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/categories/:categoryId/questions" method="GET">
+        <service class="Magendoo\Faq\Api\QuestionManagementInterface" method="getCategoryQuestions"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/faq/questions/search" method="GET">
+        <service class="Magendoo\Faq\Api\QuestionManagementInterface" method="searchQuestions"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- Tags -->
+    <route url="/V1/faq/tags" method="GET">
+        <service class="Magendoo\Faq\Api\TagRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magendoo_Faq::question"/>
+        </resources>
+    </route>
+</routes>

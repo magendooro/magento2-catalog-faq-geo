@@ -1,0 +1,27 @@
+<?php
+/**
+ * Magendoo Faq Question Rating - Average (Stars) Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Question\Rating $block */
+?>
+<?php $question = $block->getQuestion(); ?>
+<?php if ($question): ?>
+<?php $avg = $block->getAverageRating(); ?>
+<div class="faq-rating faq-rating--average"
+     data-question-id="<?= (int) $question->getQuestionId() ?>">
+    <div class="rating-stars" data-rating="<?= $block->escapeHtmlAttr(number_format($avg, 2, '.', '')) ?>">
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+            <span class="star <?= $i <= (int) round($avg) ? 'filled' : 'empty' ?>" aria-hidden="true">&#9733;</span>
+        <?php endfor; ?>
+    </div>
+    <span class="rating-value">
+        <?= $block->escapeHtml(number_format($avg, 1)) ?> <?= $block->escapeHtml(__('/ 5')) ?>
+    </span>
+</div>
+<?php endif; ?>

@@ -1,0 +1,18 @@
+<!--@subject New FAQ Question Submitted @-->
+<!--@vars {
+"var question.title":"Question Title",
+"var sender_name":"Sender Name",
+"var sender_email":"Sender Email"
+} @-->
+{{template config_path="design/email/header_template"}}
+<table>
+    <tr><td>
+        <h1>{{trans "New FAQ Question Submitted"}}</h1>
+        <p>{{trans "A new question has been submitted to your FAQ:"}}</p>
+        <p><strong>{{trans "From:"}}</strong> {{var sender_name}} ({{var sender_email}})</p>
+        <p><strong>{{trans "Question:"}}</strong></p>
+        <p>{{var question_title}}</p>
+        <p>{{trans "Log in to the admin panel to review and answer this question."}}</p>
+    </td></tr>
+</table>
+{{template config_path="design/email/footer_template"}}

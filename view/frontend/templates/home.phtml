@@ -1,0 +1,53 @@
+<?php
+/**
+ * Magendoo Faq Home Template
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+
+/** @var \Magendoo\Faq\Block\Faq\Home $block */
+?>
+<div class="faq-home">
+    <?php /* Page title rendered by default Magento page-title-wrapper block. */ ?>
+
+    <?php if ($block->isSearchBoxEnabled()): ?>
+    <div class="faq-search">
+        <form action="<?= $block->escapeUrl($block->getSearchUrl()) ?>" method="get">
+            <div class="field search">
+                <input type="text" name="q" placeholder="<?= $block->escapeHtmlAttr(__('Search FAQ...')) ?>"
+                       class="input-text" autocomplete="off"/>
+                <button type="submit" class="action search" title="<?= $block->escapeHtmlAttr(__('Search')) ?>">
+                    <span><?= $block->escapeHtml(__('Search')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <?php endif; ?>
+
+    <div class="faq-categories">
+        <?php $categories = $block->getCategories(); ?>
+        <?php if ($categories && $categories->getSize()): ?>
+            <div class="faq-category-list">
+                <?php foreach ($categories as $category): ?>
+                <div class="faq-category-item">
+                    <a href="<?= $block->escapeUrl($block->getCategoryUrl($category)) ?>" class="faq-category-link">
+                        <?php if ($category->getIcon()): ?>
+                        <img src="<?= $block->escapeUrl($category->getIcon()) ?>"
+                             alt="<?= $block->escapeHtmlAttr($category->getName()) ?>" class="faq-category-icon"/>
+                        <?php endif; ?>
+                        <h2 class="faq-category-name"><?= $block->escapeHtml($category->getName()) ?></h2>
+                        <?php if ($category->getDescription()): ?>
+                        <p class="faq-category-description"><?= $block->escapeHtml($category->getDescription()) ?></p>
+                        <?php endif; ?>
+                    </a>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <p class="faq-no-categories"><?= $block->escapeHtml(__('No FAQ categories available.')) ?></p>
+        <?php endif; ?>
+    </div>
+</div>

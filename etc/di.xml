@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq Dependency Injection configuration
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- API Preferences -->
+    <preference for="Magendoo\Faq\Api\CategoryRepositoryInterface"
+                type="Magendoo\Faq\Model\CategoryRepository"/>
+    <preference for="Magendoo\Faq\Api\QuestionRepositoryInterface"
+                type="Magendoo\Faq\Model\QuestionRepository"/>
+    <preference for="Magendoo\Faq\Api\QuestionManagementInterface"
+                type="Magendoo\Faq\Model\QuestionManagement"/>
+    <preference for="Magendoo\Faq\Api\TagRepositoryInterface"
+                type="Magendoo\Faq\Model\TagRepository"/>
+
+    <!-- Data Preferences -->
+    <preference for="Magendoo\Faq\Api\Data\CategoryInterface"
+                type="Magendoo\Faq\Model\Category"/>
+    <preference for="Magendoo\Faq\Api\Data\QuestionInterface"
+                type="Magendoo\Faq\Model\Question"/>
+    <preference for="Magendoo\Faq\Api\Data\TagInterface"
+                type="Magendoo\Faq\Model\Tag"/>
+    <preference for="Magendoo\Faq\Api\Data\CategorySearchResultsInterface"
+                type="Magendoo\Faq\Model\CategorySearchResults"/>
+    <preference for="Magendoo\Faq\Api\Data\QuestionSearchResultsInterface"
+                type="Magendoo\Faq\Model\QuestionSearchResults"/>
+
+    <!-- Console Command Registration -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="magendoo_faq_reindex"
+                      xsi:type="object">Magendoo\Faq\Console\Command\ReindexCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Register FAQ URLs as sitemap providers so `bin/magento sitemap:generate`
+         emits them alongside products, categories, and CMS pages. -->
+    <type name="Magento\Sitemap\Model\ItemProvider\Composite">
+        <arguments>
+            <argument name="itemProviders" xsi:type="array">
+                <item name="faqCategoryProvider" xsi:type="object">Magendoo\Faq\Model\Sitemap\ItemProvider\FaqCategory</item>
+                <item name="faqQuestionProvider" xsi:type="object">Magendoo\Faq\Model\Sitemap\ItemProvider\FaqQuestion</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Collection Processor for Search Criteria -->
+    <type name="Magendoo\Faq\Model\CategoryRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Magendoo\Faq\Model\QuestionRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Magendoo\Faq\Model\TagRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor</argument>
+        </arguments>
+    </type>
+
+    <!-- Grid Collection Registration for UI Components -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="faq_category_listing_data_source" xsi:type="string">Magendoo\Faq\Model\ResourceModel\Category\Grid\Collection</item>
+                <item name="faq_question_listing_data_source" xsi:type="string">Magendoo\Faq\Model\ResourceModel\Question\Grid\Collection</item>
+                <item name="faq_searchlog_listing_data_source" xsi:type="string">Magendoo\Faq\Model\ResourceModel\SearchLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Grid Collection Configuration: Category -->
+    <type name="Magendoo\Faq\Model\ResourceModel\Category\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magendoo_faq_category</argument>
+            <argument name="eventPrefix" xsi:type="string">magendoo_faq_category_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">category_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magendoo\Faq\Model\ResourceModel\Category</argument>
+        </arguments>
+    </type>
+
+    <!-- Grid Collection Configuration: Question -->
+    <type name="Magendoo\Faq\Model\ResourceModel\Question\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magendoo_faq_question</argument>
+            <argument name="eventPrefix" xsi:type="string">magendoo_faq_question_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">question_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magendoo\Faq\Model\ResourceModel\Question</argument>
+        </arguments>
+    </type>
+
+    <!-- Grid Collection Configuration: SearchLog -->
+    <type name="Magendoo\Faq\Model\ResourceModel\SearchLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magendoo_faq_search_log</argument>
+            <argument name="eventPrefix" xsi:type="string">magendoo_faq_searchlog_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">searchlog_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magendoo\Faq\Model\ResourceModel\SearchLog</argument>
+        </arguments>
+    </type>
+</config>

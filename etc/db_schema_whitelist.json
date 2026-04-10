@@ -1,0 +1,200 @@
+{
+    "magendoo_faq_category": {
+        "column": {
+            "category_id": true,
+            "name": true,
+            "page_title": true,
+            "url_key": true,
+            "description": true,
+            "icon": true,
+            "position": true,
+            "status": true,
+            "meta_title": true,
+            "meta_description": true,
+            "noindex": true,
+            "nofollow": true,
+            "canonical_url": true,
+            "exclude_sitemap": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_CATEGORY_URL_KEY": true,
+            "MAGENDOO_FAQ_CATEGORY_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "magendoo_faq_category_store": {
+        "column": {
+            "category_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENDOO_FAQ_CTGR_STORE_CTGR_ID_MAGENDOO_FAQ_CTGR_CTGR_ID": true,
+            "MAGENDOO_FAQ_CATEGORY_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "magendoo_faq_category_customer_group": {
+        "column": {
+            "category_id": true,
+            "customer_group_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENDOO_FAQ_CTGR_CSTR_GROUP_CTGR_ID_MAGENDOO_FAQ_CTGR_CTGR_ID": true
+        }
+    },
+    "magendoo_faq_question": {
+        "column": {
+            "question_id": true,
+            "title": true,
+            "url_key": true,
+            "short_answer": true,
+            "full_answer": true,
+            "status": true,
+            "visibility": true,
+            "position": true,
+            "is_show_full_answer": true,
+            "sender_name": true,
+            "sender_email": true,
+            "customer_id": true,
+            "positive_rating": true,
+            "negative_rating": true,
+            "average_rating": true,
+            "view_count": true,
+            "meta_title": true,
+            "meta_description": true,
+            "noindex": true,
+            "nofollow": true,
+            "canonical_url": true,
+            "exclude_sitemap": true,
+            "hide_direct_url": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_QUESTION_URL_KEY": true,
+            "MAGENDOO_FAQ_QUESTION_STATUS": true,
+            "MAGENDOO_FAQ_QUESTION_VISIBILITY": true,
+            "MAGENDOO_FAQ_QUESTION_CUSTOMER_ID": true,
+            "MAGENDOO_FAQ_QUESTION_TITLE_SHORT_ANSWER_FULL_ANSWER": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENDOO_FAQ_QUESTION_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "magendoo_faq_question_store": {
+        "column": {
+            "question_id": true,
+            "store_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_A7BAEAE9FFAEF2A5B687AA6854D12229": true,
+            "MAGENDOO_FAQ_QUESTION_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "magendoo_faq_question_category": {
+        "column": {
+            "question_id": true,
+            "category_id": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_QUESTION_CATEGORY_CATEGORY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_84484EEAB1114823754A07F1C19AA620": true,
+            "MAGENDOO_FAQ_QUESTION_CTGR_CTGR_ID_MAGENDOO_FAQ_CTGR_CTGR_ID": true
+        }
+    },
+    "magendoo_faq_question_product": {
+        "column": {
+            "question_id": true,
+            "product_id": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_QUESTION_PRODUCT_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_DE1B6F9E217B18CBD9BC8724778A975A": true,
+            "MAGENDOO_FAQ_QUESTION_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true
+        }
+    },
+    "magendoo_faq_question_customer_group": {
+        "column": {
+            "question_id": true,
+            "customer_group_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_F50C19457D24FED423C731CDA5F48E8E": true
+        }
+    },
+    "magendoo_faq_tag": {
+        "column": {
+            "tag_id": true,
+            "name": true,
+            "url_key": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENDOO_FAQ_TAG_NAME": true,
+            "MAGENDOO_FAQ_TAG_URL_KEY": true
+        }
+    },
+    "magendoo_faq_question_tag": {
+        "column": {
+            "question_id": true,
+            "tag_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_A0086A11AFE3BE70BCC1C520B880C9A2": true,
+            "MAGENDOO_FAQ_QUESTION_TAG_TAG_ID_MAGENDOO_FAQ_TAG_TAG_ID": true
+        }
+    },
+    "magendoo_faq_rating": {
+        "column": {
+            "rating_id": true,
+            "question_id": true,
+            "customer_id": true,
+            "ip_address": true,
+            "vote_type": true,
+            "value": true,
+            "created_at": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_RATING_QUESTION_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_9E10C383EF1CAAFFA85E45B81A2CBBFB": true,
+            "MAGENDOO_FAQ_RATING_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "magendoo_faq_search_log": {
+        "column": {
+            "log_id": true,
+            "query_text": true,
+            "store_id": true,
+            "results_count": true,
+            "hits": true,
+            "created_at": true
+        },
+        "index": {
+            "MAGENDOO_FAQ_SEARCH_LOG_QUERY_TEXT": true,
+            "MAGENDOO_FAQ_SEARCH_LOG_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MAGENDOO_FAQ_SEARCH_LOG_STORE_ID_STORE_STORE_ID": true
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magendoo Faq ACL configuration
+ *
+ * @category  Magendoo
+ * @package   Magendoo_Faq
+ * @copyright Copyright (c) Magendoo (https://magendoo.com)
+ * @license   https://opensource.org/licenses/OSL-3.0 Open Software License v. 3.0 (OSL-3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::content">
+                    <resource id="Magendoo_Faq::faq"
+                              title="FAQ"
+                              translate="title"
+                              sortOrder="60">
+                        <resource id="Magendoo_Faq::category"
+                                  title="Manage Categories"
+                                  translate="title">
+                            <resource id="Magendoo_Faq::category_view"
+                                      title="View Categories"
+                                      translate="title"/>
+                            <resource id="Magendoo_Faq::category_edit"
+                                      title="Edit Categories"
+                                      translate="title"/>
+                            <resource id="Magendoo_Faq::category_delete"
+                                      title="Delete Categories"
+                                      translate="title"/>
+                        </resource>
+                        <resource id="Magendoo_Faq::question"
+                                  title="Manage Questions"
+                                  translate="title">
+                            <resource id="Magendoo_Faq::question_view"
+                                      title="View Questions"
+                                      translate="title"/>
+                            <resource id="Magendoo_Faq::question_edit"
+                                      title="Edit Questions"
+                                      translate="title"/>
+                            <resource id="Magendoo_Faq::question_delete"
+                                      title="Delete Questions"
+                                      translate="title"/>
+                            <resource id="Magendoo_Faq::question_approve"
+                                      title="Approve Questions"
+                                      translate="title"/>
+                        </resource>
+                        <resource id="Magendoo_Faq::search_log"
+                                  title="Search Terms Report"
+                                  translate="title"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magendoo_Faq::config"
+                                      title="FAQ Configuration"
+                                      translate="title"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
